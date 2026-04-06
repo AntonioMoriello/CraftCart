@@ -3,9 +3,86 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CraftCart.Pages.SignInPage"
              Title="SignInPage">
-    <VerticalStackLayout Padding="20" Spacing="20">
-        <Label Text="Sign In"
-            FontSize="28"
-            HorizontalOptions="Center"/>
-    </VerticalStackLayout>
+
+    <Grid ColumnDefinitions="*,2*">
+
+        <Grid Grid.Column="0" BackgroundColor="#2E5E3F">
+            <VerticalStackLayout VerticalOptions="Center"
+                                 HorizontalOptions="Center"
+                                 Spacing="5">
+                <Label Text="&#x1F6D2;"
+                       FontSize="60"
+                       HorizontalOptions="Center"/>
+                <Label Text="CraftCart"
+                       FontSize="35"
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"/>
+                <Label Text="Handmade, delivered to you"
+                       FontSize="14"
+                       TextColor="#C8D6C8"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+        </Grid>
+
+        <ScrollView Grid.Column="1">
+            <VerticalStackLayout Padding="40" Spacing="10">
+
+                <Label Text="Sign-in"
+                       FontSize="32"
+                       FontAttributes="Bold"/>
+
+                <HorizontalStackLayout Spacing="5">
+                    <Label Text="Welcome back!"
+                           TextColor="Gray"
+                           VerticalOptions="Center"/>
+                    <Label Text="Don't have an account? Sign-up here"
+                           TextColor="Blue"
+                           VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnGoToSignUpPage"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </HorizontalStackLayout>
+
+                <Label Text="Email"
+                       FontAttributes="Bold"
+                       Margin="0,20,0,0"/>
+                <Entry x:Name="EmailEntry"
+                       Placeholder="Email"/>
+
+                <Label Text="Password"
+                       FontAttributes="Bold"
+                       Margin="0,10,0,0"/>
+                <Entry x:Name="PasswordEntry"
+                       IsPassword="True"
+                       Placeholder="Password"/>
+
+                <Button Text="Go!"
+                        BackgroundColor="#2E5E3F"
+                        TextColor="White"
+                        CornerRadius="5"
+                        HorizontalOptions="Start"
+                        WidthRequest="100"
+                        Clicked="OnSignInClicked"/>
+
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="Forgot password?"
+                           VerticalOptions="Center"/>
+                    <Button Text="Reset"
+                            BackgroundColor="#2E5E3F"
+                            TextColor="White"
+                            CornerRadius="5"
+                            HeightRequest="35"
+                            Clicked="OnResetClicked"/>
+                </HorizontalStackLayout>
+
+                <Label x:Name="result"
+                       TextColor="Red"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+
 </ContentPage>

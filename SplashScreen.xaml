@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CraftCart.SplashScreen"
+             BackgroundColor="#2E5E3F"
+             Shell.NavBarIsVisible="False">
+
+    <VerticalStackLayout
+        VerticalOptions="Center"
+        HorizontalOptions="Center"
+        Spacing="5">
+
+        <Label Text="&#x1F6D2;"
+               FontSize="60"
+               HorizontalOptions="Center"/>
+
+        <Label Text="CraftCart"
+               FontSize="45"
+               TextColor="White"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"/>
+
+        <Label Text="Handmade, delivered to you"
+               FontSize="16"
+               TextColor="#C8D6C8"
+               HorizontalOptions="Center"/>
+
+        <Label Text="Loading..."
+               FontSize="14"
+               TextColor="#A0B8A0"
+               HorizontalOptions="Center"
+               Margin="0,15,0,0"/>
+
+        <ProgressBar x:Name="loadingBar"
+                     Progress="0"
+                     ProgressColor="#7BA88E"
+                     WidthRequest="200"
+                     HorizontalOptions="Center"/>
+
+    </VerticalStackLayout>
+
+</ContentPage>
