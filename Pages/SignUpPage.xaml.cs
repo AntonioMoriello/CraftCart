@@ -5,21 +5,21 @@ namespace CraftCart.Pages;
 
 public partial class SignUpPage : ContentPage
 {
-    private FirebaseAuthService _authService = new FirebaseAuthService();
-    private FirebaseDbService _dbService = new FirebaseDbService();
+    private readonly FirebaseAuthService _authService = new FirebaseAuthService();
+    private readonly FirebaseDbService _dbService = new FirebaseDbService();
 
     public SignUpPage()
     {
         InitializeComponent();
     }
 
-    private async void OnSignUpClicked(object sender, EventArgs e)
+    private async void OnSignUpClicked(object? sender, EventArgs e)
     {
         try
         {
             if (PasswordEntry.Text != ConfirmPasswordEntry.Text)
             {
-                result.Text = "Passwords do not match";
+                ResultLabel.Text = "Passwords do not match";
                 return;
             }
 
@@ -28,7 +28,7 @@ public partial class SignUpPage : ContentPage
             else if (SellerRadio.IsChecked) role = "Seller";
             else
             {
-                result.Text = "Please select a role";
+                ResultLabel.Text = "Please select a role";
                 return;
             }
 
@@ -54,20 +54,20 @@ public partial class SignUpPage : ContentPage
 
             if (role == "Buyer")
             {
-                Application.Current.MainPage = new NavigationPage(new BrowseProductsPage());
+                Application.Current!.MainPage = new NavigationPage(new BrowseProductsPage());
             }
             else
             {
-                Application.Current.MainPage = new NavigationPage(new SellerDashboardPage());
+                Application.Current!.MainPage = new NavigationPage(new SellerDashboardPage());
             }
         }
         catch (Exception ex)
         {
-            result.Text = ex.Message;
+            ResultLabel.Text = ex.Message;
         }
     }
 
-    private async void OnGoToSignInPage(object sender, EventArgs e)
+    private async void OnGoToSignInPage(object? sender, TappedEventArgs e)
     {
         await Navigation.PushAsync(new SignInPage());
     }

@@ -2,10 +2,111 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CraftCart.Pages.BrowseProductsPage"
-             Title="BrowseProductsPage">
-    <VerticalStackLayout Padding="20" Spacing="20">
-        <Label Text="Browse Products"
-            FontSize="28"
-            HorizontalOptions="Center"/>
-    </VerticalStackLayout>
+             Title="BrowseProductsPage"
+             BackgroundColor="White">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <Grid Grid.Row="0" BackgroundColor="#2E5E3F" Padding="20,12" ColumnDefinitions="Auto,*,Auto,Auto,Auto,Auto">
+            <HorizontalStackLayout Grid.Column="0" Spacing="8" VerticalOptions="Center">
+                <Label Text="&#x1F6D2;" FontSize="22" VerticalOptions="Center"/>
+                <Label Text="CraftCart" FontSize="20" TextColor="White" FontAttributes="Bold" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+            <Label Grid.Column="2" Text="Browse" TextColor="White" FontAttributes="Bold" FontSize="14" VerticalOptions="Center" Margin="10,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnBrowseTapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Grid.Column="3" Text="My Cart" TextColor="#C8D6C8" FontSize="14" VerticalOptions="Center" Margin="10,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnCartTapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Grid.Column="4" Text="Orders" TextColor="#C8D6C8" FontSize="14" VerticalOptions="Center" Margin="10,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnOrdersTapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Grid.Column="5" Text="Account" TextColor="#C8D6C8" FontSize="14" VerticalOptions="Center" Margin="10,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnAccountTapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="30,20" Spacing="15">
+
+                <Grid ColumnDefinitions="*,Auto">
+                    <VerticalStackLayout Grid.Column="0">
+                        <Label Text="Browse Products" FontSize="26" FontAttributes="Bold"/>
+                        <Label Text="Find unique handmade items" TextColor="Gray" FontSize="13"/>
+                    </VerticalStackLayout>
+                    <Border Grid.Column="1" Stroke="#E0E0E0" StrokeShape="RoundRectangle 8" Padding="0" VerticalOptions="Center" WidthRequest="220">
+                        <Entry x:Name="SearchEntry" Placeholder="Search products..." FontSize="13"
+                               TextChanged="OnSearchTextChanged"/>
+                    </Border>
+                </Grid>
+
+                <HorizontalStackLayout Spacing="10">
+                    <Border x:Name="FilterAllBorder" BackgroundColor="#2E5E3F" StrokeShape="RoundRectangle 15" Padding="14,6" Stroke="Transparent">
+                        <Label Text="All" TextColor="White" FontSize="13"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnFilterAll"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+                    <Border BackgroundColor="White" StrokeShape="RoundRectangle 15" Padding="14,6" Stroke="#CCC">
+                        <Label Text="Jewelry" TextColor="#333" FontSize="13"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnFilterJewelry"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+                    <Border BackgroundColor="White" StrokeShape="RoundRectangle 15" Padding="14,6" Stroke="#CCC">
+                        <Label Text="Pottery" TextColor="#333" FontSize="13"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnFilterPottery"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+                    <Border BackgroundColor="White" StrokeShape="RoundRectangle 15" Padding="14,6" Stroke="#CCC">
+                        <Label Text="Art" TextColor="#333" FontSize="13"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnFilterArt"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+                    <Border BackgroundColor="White" StrokeShape="RoundRectangle 15" Padding="14,6" Stroke="#CCC">
+                        <Label Text="Textiles" TextColor="#333" FontSize="13"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnFilterTextiles"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+                </HorizontalStackLayout>
+
+                <CollectionView x:Name="ProductCollection" SelectionMode="Single" SelectionChanged="OnProductSelected">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="4" HorizontalItemSpacing="15" VerticalItemSpacing="15"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Stroke="#E8E8E8" StrokeShape="RoundRectangle 10" Padding="0" StrokeThickness="1">
+                                <VerticalStackLayout>
+                                    <BoxView BackgroundColor="#E8F5E9" HeightRequest="140"/>
+                                    <VerticalStackLayout Padding="12,8" Spacing="2">
+                                        <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="14"/>
+                                        <Label Text="{Binding SellerName, StringFormat='by {0}'}" TextColor="Gray" FontSize="11"/>
+                                        <Label Text="{Binding Price, StringFormat='${0:F2}'}" TextColor="#2E5E3F" FontAttributes="Bold" FontSize="14" Margin="0,4,0,0"/>
+                                        <Label Text="&#x2B50;&#x2B50;&#x2B50;&#x2B50;&#x2B50;" FontSize="10" TextColor="#F5A623"/>
+                                    </VerticalStackLayout>
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Label x:Name="StatusLabel" TextColor="Gray" FontSize="13" HorizontalOptions="Center"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+
 </ContentPage>

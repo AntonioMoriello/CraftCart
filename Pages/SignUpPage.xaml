@@ -78,7 +78,7 @@
                         WidthRequest="120"
                         Clicked="OnSignUpClicked"/>
 
-                <Label x:Name="result"
+                <Label x:Name="ResultLabel"
                        TextColor="Red"/>
 
             </VerticalStackLayout>

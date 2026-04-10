@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CraftCart.Pages.MyOrdersPage"
+             Title="MyOrdersPage"
+             BackgroundColor="White">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <Grid Grid.Row="0" BackgroundColor="#2E5E3F" Padding="20,12" ColumnDefinitions="Auto,*,Auto,Auto,Auto,Auto">
+            <HorizontalStackLayout Grid.Column="0" Spacing="8" VerticalOptions="Center">
+                <Label Text="&#x1F6D2;" FontSize="22" VerticalOptions="Center"/>
+                <Label Text="CraftCart" FontSize="20" TextColor="White" FontAttributes="Bold" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+            <Label Grid.Column="2" Text="Browse" TextColor="#C8D6C8" FontSize="14" VerticalOptions="Center" Margin="10,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnBrowseTapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Grid.Column="3" Text="My Cart" TextColor="#C8D6C8" FontSize="14" VerticalOptions="Center" Margin="10,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnCartTapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Grid.Column="4" Text="Orders" TextColor="White" FontAttributes="Bold" FontSize="14" VerticalOptions="Center" Margin="10,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnOrdersTapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Grid.Column="5" Text="Account" TextColor="#C8D6C8" FontSize="14" VerticalOptions="Center" Margin="10,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnAccountTapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="30,20" Spacing="15">
+
+                <Label Text="My Orders" FontSize="26" FontAttributes="Bold"/>
+                <Label Text="Track all your purchases" TextColor="Gray" FontSize="13" Margin="0,-10,0,0"/>
+
+                <HorizontalStackLayout Spacing="10" Margin="0,5,0,0">
+                    <Border x:Name="FilterAllBorder" BackgroundColor="#2E5E3F" StrokeShape="RoundRectangle 15" Padding="14,6" Stroke="Transparent">
+                        <Label Text="All" TextColor="White" FontSize="13"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnFilterAll"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+                    <Border x:Name="FilterProcessingBorder" BackgroundColor="White" StrokeShape="RoundRectangle 15" Padding="14,6" Stroke="#CCC">
+                        <Label Text="Processing" TextColor="#333" FontSize="13"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnFilterProcessing"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+                    <Border x:Name="FilterShippedBorder" BackgroundColor="White" StrokeShape="RoundRectangle 15" Padding="14,6" Stroke="#CCC">
+                        <Label Text="Shipped" TextColor="#333" FontSize="13"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnFilterShipped"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+                    <Border x:Name="FilterDeliveredBorder" BackgroundColor="White" StrokeShape="RoundRectangle 15" Padding="14,6" Stroke="#CCC">
+                        <Label Text="Delivered" TextColor="#333" FontSize="13"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnFilterDelivered"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+                </HorizontalStackLayout>
+
+                <CollectionView x:Name="OrdersCollection">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Stroke="#E8E8E8" StrokeShape="RoundRectangle 10" Padding="20" Margin="0,0,0,8">
+                                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
+                                    <HorizontalStackLayout Spacing="10">
+                                        <Label Text="{Binding Id, StringFormat='Order #{0}'}" FontAttributes="Bold" FontSize="15"/>
+                                        <Border BackgroundColor="{Binding StatusBackground}" StrokeShape="RoundRectangle 10" Padding="10,3" Stroke="Transparent">
+                                            <Label Text="{Binding Status}" TextColor="{Binding StatusColor}" FontSize="11"/>
+                                        </Border>
+                                    </HorizontalStackLayout>
+                                    <VerticalStackLayout Grid.Column="1" HorizontalOptions="End">
+                                        <Label Text="{Binding Total, StringFormat='${0:F2}'}" FontAttributes="Bold" FontSize="15" HorizontalTextAlignment="End"/>
+                                    </VerticalStackLayout>
+                                    <Label Grid.Row="1" Text="{Binding OrderDate}" TextColor="Gray" FontSize="12" Margin="0,3,0,0"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Label x:Name="EmptyLabel" Text="You have no orders yet" TextColor="Gray" FontSize="14"
+                       HorizontalOptions="Center" IsVisible="False"/>
+                <Label x:Name="StatusLabel" TextColor="Gray" FontSize="13" HorizontalOptions="Center"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+
+</ContentPage>

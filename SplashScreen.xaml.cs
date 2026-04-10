@@ -11,8 +11,8 @@ public partial class SplashScreen : ContentPage
     {
         base.OnAppearing();
 
-        await loadingBar.ProgressTo(1.0, 3000, Easing.Linear);
+        await LoadingBar.ProgressTo(1.0, 3000, Easing.Linear);
 
-        Application.Current.MainPage = new NavigationPage(new CraftCart.Pages.SignInPage());
+        Application.Current!.MainPage = new NavigationPage(new CraftCart.Pages.SignInPage());
     }
 }

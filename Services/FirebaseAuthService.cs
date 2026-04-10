@@ -76,5 +76,26 @@ namespace CraftCart.Services
 
             return content;
         }
+
+        public async Task<string> ChangePassword(string idToken, string newPassword)
+        {
+            var url =
+                $"https://identitytoolkit.googleapis.com/v1/accounts:update?key={ApiKey}";
+
+            var data = new
+            {
+                idToken = idToken,
+                password = newPassword,
+                returnSecureToken = true
+            };
+
+            var response = await _httpClient.PostAsJsonAsync(url, data);
+            var content = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception(content);
+
+            return content;
+        }
     }
 }

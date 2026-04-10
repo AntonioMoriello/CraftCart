@@ -77,7 +77,7 @@
                             Clicked="OnResetClicked"/>
                 </HorizontalStackLayout>
 
-                <Label x:Name="result"
+                <Label x:Name="ResultLabel"
                        TextColor="Red"/>
 
             </VerticalStackLayout>

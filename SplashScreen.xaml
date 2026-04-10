@@ -31,7 +31,7 @@
                HorizontalOptions="Center"
                Margin="0,15,0,0"/>
 
-        <ProgressBar x:Name="loadingBar"
+        <ProgressBar x:Name="LoadingBar"
                      Progress="0"
                      ProgressColor="#7BA88E"
                      WidthRequest="200"

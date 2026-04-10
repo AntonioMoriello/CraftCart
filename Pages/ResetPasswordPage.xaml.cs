@@ -4,33 +4,33 @@ namespace CraftCart.Pages;
 
 public partial class ResetPasswordPage : ContentPage
 {
-    private FirebaseAuthService _authService = new FirebaseAuthService();
+    private readonly FirebaseAuthService _authService = new FirebaseAuthService();
 
     public ResetPasswordPage()
     {
         InitializeComponent();
     }
 
-    private async void OnSubmitClicked(object sender, EventArgs e)
+    private async void OnSubmitClicked(object? sender, EventArgs e)
     {
         try
         {
             if (string.IsNullOrWhiteSpace(EmailEntry.Text))
             {
-                result.Text = "Please enter your email";
+                ResultLabel.Text = "Please enter your email";
                 return;
             }
 
             await _authService.ResetPassword(EmailEntry.Text);
-            await DisplayAlert("Success", "Password reset email sent", "OK");
+            await DisplayAlertAsync("Success", "Password reset email sent", "OK");
         }
         catch (Exception ex)
         {
-            result.Text = ex.Message;
+            ResultLabel.Text = ex.Message;
         }
     }
 
-    private async void OnGoToSignInPage(object sender, EventArgs e)
+    private async void OnGoToSignInPage(object? sender, TappedEventArgs e)
     {
         await Navigation.PushAsync(new SignInPage());
     }

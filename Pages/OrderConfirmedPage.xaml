@@ -2,10 +2,104 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CraftCart.Pages.OrderConfirmedPage"
-             Title="OrderConfirmedPage">
-    <VerticalStackLayout Padding="20" Spacing="20">
-        <Label Text="Order Confirmed"
-            FontSize="28"
-            HorizontalOptions="Center"/>
-    </VerticalStackLayout>
+             Title="OrderConfirmedPage"
+             BackgroundColor="White">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <Grid Grid.Row="0" BackgroundColor="#2E5E3F" Padding="20,12" ColumnDefinitions="Auto,*,Auto,Auto,Auto,Auto">
+            <HorizontalStackLayout Grid.Column="0" Spacing="8" VerticalOptions="Center">
+                <Label Text="&#x1F6D2;" FontSize="22" VerticalOptions="Center"/>
+                <Label Text="CraftCart" FontSize="20" TextColor="White" FontAttributes="Bold" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+            <Label Grid.Column="2" Text="Browse" TextColor="#C8D6C8" FontSize="14" VerticalOptions="Center" Margin="10,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnBrowseTapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Grid.Column="3" Text="My Cart" TextColor="#C8D6C8" FontSize="14" VerticalOptions="Center" Margin="10,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnCartTapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Grid.Column="4" Text="Orders" TextColor="White" FontAttributes="Bold" FontSize="14" VerticalOptions="Center" Margin="10,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnOrdersTapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Grid.Column="5" Text="Account" TextColor="#C8D6C8" FontSize="14" VerticalOptions="Center" Margin="10,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnAccountTapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="40,30" Spacing="10" HorizontalOptions="Center">
+
+                <Label Text="&#x2705;" FontSize="60" HorizontalOptions="Center"/>
+
+                <Label Text="Order Confirmed!" FontSize="28" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,5,0,15"/>
+
+                <Border Stroke="#E8E8E8" StrokeShape="RoundRectangle 10" Padding="30,20" HorizontalOptions="Center" WidthRequest="380">
+                    <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                        <HorizontalStackLayout Spacing="5" HorizontalOptions="Center">
+                            <Label Text="Order #:" FontAttributes="Bold" FontSize="14"/>
+                            <Label x:Name="OrderIdLabel" FontSize="14"/>
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Spacing="5" HorizontalOptions="Center">
+                            <Label Text="Date:" FontAttributes="Bold" FontSize="14"/>
+                            <Label x:Name="OrderDateLabel" FontSize="14"/>
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Spacing="5" HorizontalOptions="Center">
+                            <Label Text="Items:" FontAttributes="Bold" FontSize="14"/>
+                            <Label x:Name="OrderItemsLabel" FontSize="14"/>
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Spacing="5" HorizontalOptions="Center">
+                            <Label Text="Total:" FontAttributes="Bold" FontSize="14"/>
+                            <Label x:Name="OrderTotalLabel" FontSize="14"/>
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Spacing="5" HorizontalOptions="Center">
+                            <Label Text="Status:" FontAttributes="Bold" FontSize="14"/>
+                            <Label Text="Processing" TextColor="#2E5E3F" FontSize="14"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Label Text="Thank you for shopping!" TextColor="#2E5E3F" FontAttributes="Bold" FontSize="16"
+                       HorizontalOptions="Center" Margin="0,20,0,0"/>
+                <Label Text="Rate your experience" TextColor="Gray" FontSize="13" HorizontalOptions="Center"/>
+
+                <HorizontalStackLayout Spacing="8" HorizontalOptions="Center">
+                    <Label x:Name="Star1Label" Text="&#x2B50;" FontSize="24" TextColor="#F5A623">
+                        <Label.GestureRecognizers><TapGestureRecognizer Tapped="OnStar1Tapped"/></Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="Star2Label" Text="&#x2606;" FontSize="24" TextColor="#F5A623">
+                        <Label.GestureRecognizers><TapGestureRecognizer Tapped="OnStar2Tapped"/></Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="Star3Label" Text="&#x2606;" FontSize="24" TextColor="#F5A623">
+                        <Label.GestureRecognizers><TapGestureRecognizer Tapped="OnStar3Tapped"/></Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="Star4Label" Text="&#x2606;" FontSize="24" TextColor="#F5A623">
+                        <Label.GestureRecognizers><TapGestureRecognizer Tapped="OnStar4Tapped"/></Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="Star5Label" Text="&#x2606;" FontSize="24" TextColor="#F5A623">
+                        <Label.GestureRecognizers><TapGestureRecognizer Tapped="OnStar5Tapped"/></Label.GestureRecognizers>
+                    </Label>
+                </HorizontalStackLayout>
+
+                <Entry x:Name="ReviewEntry" Placeholder="Leave a review..." FontSize="13" WidthRequest="380" HorizontalOptions="Center"/>
+
+                <Button Text="Submit Review" BackgroundColor="#2E5E3F" TextColor="White" CornerRadius="8"
+                        Padding="20,8" FontSize="13" HorizontalOptions="Center" Clicked="OnSubmitReviewClicked"/>
+
+                <Button Text="Continue Shopping" BackgroundColor="White" TextColor="#2E5E3F" BorderColor="#2E5E3F"
+                        BorderWidth="1" CornerRadius="8" Padding="20,8" FontSize="13" HorizontalOptions="Center"
+                        Clicked="OnContinueShoppingClicked"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+
 </ContentPage>

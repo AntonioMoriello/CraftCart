@@ -1,19 +1,18 @@
 using CraftCart.Services;
-using CraftCart.Models;
 
 namespace CraftCart.Pages;
 
 public partial class SignInPage : ContentPage
 {
-    private FirebaseAuthService _authService = new FirebaseAuthService();
-    private FirebaseDbService _dbService = new FirebaseDbService();
+    private readonly FirebaseAuthService _authService = new FirebaseAuthService();
+    private readonly FirebaseDbService _dbService = new FirebaseDbService();
 
     public SignInPage()
     {
         InitializeComponent();
     }
 
-    private async void OnSignInClicked(object sender, EventArgs e)
+    private async void OnSignInClicked(object? sender, EventArgs e)
     {
         try
         {
@@ -34,25 +33,25 @@ public partial class SignInPage : ContentPage
 
             if (role == "Buyer")
             {
-                Application.Current.MainPage = new NavigationPage(new BrowseProductsPage());
+                Application.Current!.MainPage = new NavigationPage(new BrowseProductsPage());
             }
             else
             {
-                Application.Current.MainPage = new NavigationPage(new SellerDashboardPage());
+                Application.Current!.MainPage = new NavigationPage(new SellerDashboardPage());
             }
         }
         catch (Exception ex)
         {
-            result.Text = ex.Message;
+            ResultLabel.Text = ex.Message;
         }
     }
 
-    private async void OnResetClicked(object sender, EventArgs e)
+    private async void OnResetClicked(object? sender, EventArgs e)
     {
         await Navigation.PushAsync(new ResetPasswordPage());
     }
 
-    private async void OnGoToSignUpPage(object sender, EventArgs e)
+    private async void OnGoToSignUpPage(object? sender, TappedEventArgs e)
     {
         await Navigation.PushAsync(new SignUpPage());
     }

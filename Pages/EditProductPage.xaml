@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CraftCart.Pages.EditProductPage"
+             Title="EditProductPage"
+             BackgroundColor="White">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <Grid Grid.Row="0" BackgroundColor="#2E5E3F" Padding="20,12" ColumnDefinitions="Auto,*,Auto,Auto,Auto,Auto">
+            <HorizontalStackLayout Grid.Column="0" Spacing="8" VerticalOptions="Center">
+                <Label Text="&#x1F6D2;" FontSize="22" VerticalOptions="Center"/>
+                <Label Text="CraftCart" FontSize="20" TextColor="White" FontAttributes="Bold" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+            <Label Grid.Column="2" Text="Dashboard" TextColor="#C8D6C8" FontSize="14" VerticalOptions="Center" Margin="10,0"/>
+            <Label Grid.Column="3" Text="My Products" TextColor="White" FontAttributes="Bold" FontSize="14" VerticalOptions="Center" Margin="10,0"/>
+            <Label Grid.Column="4" Text="Orders" TextColor="#C8D6C8" FontSize="14" VerticalOptions="Center" Margin="10,0"/>
+            <Label Grid.Column="5" Text="Account" TextColor="#C8D6C8" FontSize="14" VerticalOptions="Center" Margin="10,0"/>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <Grid ColumnDefinitions="1.5*,*" Padding="30,25" ColumnSpacing="30">
+
+                <VerticalStackLayout Grid.Column="0" Spacing="12">
+
+                    <Grid ColumnDefinitions="*,Auto">
+                        <VerticalStackLayout>
+                            <Label Text="Edit Product" FontSize="24" FontAttributes="Bold"/>
+                            <Label Text="Update or remove your listing" TextColor="Gray" FontSize="13"/>
+                        </VerticalStackLayout>
+                        <Button Grid.Column="1" Text="&#x1F5D1; Delete Product" BackgroundColor="#D32F2F" TextColor="White"
+                                CornerRadius="8" Padding="15,8" FontSize="13" VerticalOptions="Center"/>
+                    </Grid>
+
+                    <Label Text="Product Name" FontAttributes="Bold" FontSize="13" Margin="0,5,0,0"/>
+                    <Entry Text="Ceramic Vase" FontSize="14"/>
+
+                    <Label Text="Description" FontAttributes="Bold" FontSize="13"/>
+                    <Editor Text="Hand-thrown ceramic vase with a unique glaze finish. Each piece is one of a kind. Perfect for fresh or dried flowers."
+                            HeightRequest="100" FontSize="14"/>
+
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="15">
+                        <VerticalStackLayout Grid.Column="0" Spacing="5">
+                            <Label Text="Price ($)" FontAttributes="Bold" FontSize="13"/>
+                            <Entry Text="45.00" FontSize="14" Keyboard="Numeric"/>
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="1" Spacing="5">
+                            <Label Text="Category" FontAttributes="Bold" FontSize="13"/>
+                            <Picker Title="Pottery" SelectedIndex="1">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Jewelry</x:String>
+                                        <x:String>Pottery</x:String>
+                                        <x:String>Art</x:String>
+                                        <x:String>Textiles</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="2" Spacing="5">
+                            <Label Text="Status" FontAttributes="Bold" FontSize="13"/>
+                            <Picker Title="Active" SelectedIndex="0">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Active</x:String>
+                                        <x:String>Inactive</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <HorizontalStackLayout Spacing="12" Margin="0,10,0,0">
+                        <Button Text="Save Changes" BackgroundColor="#2E5E3F" TextColor="White" CornerRadius="8"
+                                Padding="20,10" FontSize="14"/>
+                        <Button Text="Cancel" BackgroundColor="White" TextColor="#2E5E3F" BorderColor="#2E5E3F"
+                                BorderWidth="1" CornerRadius="8" Padding="20,10" FontSize="14"/>
+                    </HorizontalStackLayout>
+
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="1" Spacing="15">
+                    <Label Text="Current Photo" FontAttributes="Bold" FontSize="15"/>
+                    <Border BackgroundColor="#E8F5E9" StrokeShape="RoundRectangle 10" Stroke="#E0E0E0"
+                            HeightRequest="200" Padding="20">
+                        <Label Text="&#x1F3FA;" FontSize="60" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    </Border>
+
+                    <Border Stroke="#CCC" StrokeShape="RoundRectangle 10" StrokeDashArray="6,3"
+                            HeightRequest="150" Padding="20">
+                        <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="8">
+                            <Label Text="&#x1F4F7;" FontSize="35" HorizontalOptions="Center"/>
+                            <Label Text="Replace photo" TextColor="Gray" FontSize="13" HorizontalOptions="Center"/>
+                            <Label Text="PNG, JPG up to 5MB" TextColor="#AAA" FontSize="11" HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+
+            </Grid>
+        </ScrollView>
+
+    </Grid>
+
+</ContentPage>

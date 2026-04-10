@@ -2,10 +2,85 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CraftCart.Pages.OrderManagementPage"
-             Title="OrderManagementPage">
-    <VerticalStackLayout Padding="20" Spacing="20">
-        <Label Text="Order Management"
-            FontSize="28"
-            HorizontalOptions="Center"/>
-    </VerticalStackLayout>
+             Title="OrderManagementPage"
+             BackgroundColor="White">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <Grid Grid.Row="0" BackgroundColor="#2E5E3F" Padding="20,12" ColumnDefinitions="Auto,*,Auto,Auto,Auto,Auto">
+            <HorizontalStackLayout Grid.Column="0" Spacing="8" VerticalOptions="Center">
+                <Label Text="&#x1F6D2;" FontSize="22" VerticalOptions="Center"/>
+                <Label Text="CraftCart" FontSize="20" TextColor="White" FontAttributes="Bold" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+            <Label Grid.Column="2" Text="Dashboard" TextColor="#C8D6C8" FontSize="14" VerticalOptions="Center" Margin="10,0"/>
+            <Label Grid.Column="3" Text="My Products" TextColor="#C8D6C8" FontSize="14" VerticalOptions="Center" Margin="10,0"/>
+            <Label Grid.Column="4" Text="Orders" TextColor="White" FontAttributes="Bold" FontSize="14" VerticalOptions="Center" Margin="10,0"/>
+            <Label Grid.Column="5" Text="Account" TextColor="#C8D6C8" FontSize="14" VerticalOptions="Center" Margin="10,0"/>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="30,20" Spacing="15">
+
+                <Label Text="Incoming Orders" FontSize="26" FontAttributes="Bold"/>
+                <Label Text="Manage customer orders" TextColor="Gray" FontSize="13" Margin="0,-10,0,5"/>
+
+                <Grid ColumnDefinitions="*,2*,*,*,*,1.5*" Padding="15,12" BackgroundColor="#F5F5F5">
+                    <Label Grid.Column="0" Text="Order #" FontAttributes="Bold" FontSize="13" TextColor="#555"/>
+                    <Label Grid.Column="1" Text="Items" FontAttributes="Bold" FontSize="13" TextColor="#555"/>
+                    <Label Grid.Column="2" Text="Buyer" FontAttributes="Bold" FontSize="13" TextColor="#555"/>
+                    <Label Grid.Column="3" Text="Total" FontAttributes="Bold" FontSize="13" TextColor="#555"/>
+                    <Label Grid.Column="4" Text="Status" FontAttributes="Bold" FontSize="13" TextColor="#555"/>
+                    <Label Grid.Column="5" Text="Actions" FontAttributes="Bold" FontSize="13" TextColor="#555"/>
+                </Grid>
+
+                <Grid ColumnDefinitions="*,2*,*,*,*,1.5*" Padding="15,12">
+                    <Label Grid.Column="0" Text="CC-1024" FontSize="13" VerticalOptions="Center"/>
+                    <Label Grid.Column="1" Text="Ceramic Vase × 1" FontSize="13" VerticalOptions="Center"/>
+                    <Label Grid.Column="2" Text="Jessica M." FontSize="13" VerticalOptions="Center"/>
+                    <Label Grid.Column="3" Text="$45.00" FontAttributes="Bold" FontSize="13" VerticalOptions="Center"/>
+                    <Border Grid.Column="4" BackgroundColor="#FFF3E0" StrokeShape="RoundRectangle 10" Padding="8,3"
+                            Stroke="Transparent" VerticalOptions="Center" HorizontalOptions="Start">
+                        <Label Text="Pending" TextColor="#E65100" FontSize="11"/>
+                    </Border>
+                    <HorizontalStackLayout Grid.Column="5" Spacing="8" VerticalOptions="Center">
+                        <Button Text="Accept" BackgroundColor="#2E5E3F" TextColor="White" CornerRadius="6"
+                                Padding="12,5" FontSize="11" HeightRequest="30"/>
+                        <Button Text="Decline" BackgroundColor="White" TextColor="#555" BorderColor="#CCC"
+                                BorderWidth="1" CornerRadius="6" Padding="12,5" FontSize="11" HeightRequest="30"/>
+                    </HorizontalStackLayout>
+                </Grid>
+
+                <BoxView HeightRequest="1" BackgroundColor="#F0F0F0"/>
+
+                <Grid ColumnDefinitions="*,2*,*,*,*,1.5*" Padding="15,12">
+                    <Label Grid.Column="0" Text="CC-1023" FontSize="13" VerticalOptions="Center"/>
+                    <Label Grid.Column="1" Text="Clay Teapot × 1, Mini Bottle × 2" FontSize="13" VerticalOptions="Center"/>
+                    <Label Grid.Column="2" Text="Mark R." FontSize="13" VerticalOptions="Center"/>
+                    <Label Grid.Column="3" Text="$120.00" FontAttributes="Bold" FontSize="13" VerticalOptions="Center"/>
+                    <Border Grid.Column="4" BackgroundColor="#E3F2FD" StrokeShape="RoundRectangle 10" Padding="8,3"
+                            Stroke="Transparent" VerticalOptions="Center" HorizontalOptions="Start">
+                        <Label Text="Shipped" TextColor="#1565C0" FontSize="11"/>
+                    </Border>
+                    <Label Grid.Column="5" Text="Track" TextColor="#555" FontSize="12" VerticalOptions="Center"/>
+                </Grid>
+
+                <BoxView HeightRequest="1" BackgroundColor="#F0F0F0"/>
+
+                <Grid ColumnDefinitions="*,2*,*,*,*,1.5*" Padding="15,12">
+                    <Label Grid.Column="0" Text="CC-1020" FontSize="13" VerticalOptions="Center"/>
+                    <Label Grid.Column="1" Text="Ceramic Vase × 2" FontSize="13" VerticalOptions="Center"/>
+                    <Label Grid.Column="2" Text="Anne T." FontSize="13" VerticalOptions="Center"/>
+                    <Label Grid.Column="3" Text="$90.00" FontAttributes="Bold" FontSize="13" VerticalOptions="Center"/>
+                    <Border Grid.Column="4" BackgroundColor="#E8F5E9" StrokeShape="RoundRectangle 10" Padding="8,3"
+                            Stroke="Transparent" VerticalOptions="Center" HorizontalOptions="Start">
+                        <Label Text="Delivered" TextColor="#2E7D32" FontSize="11"/>
+                    </Border>
+                    <Label Grid.Column="5" Text="View" TextColor="#555" FontSize="12" VerticalOptions="Center"/>
+                </Grid>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+
 </ContentPage>

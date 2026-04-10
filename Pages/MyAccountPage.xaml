@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CraftCart.Pages.MyAccountPage"
+             Title="MyAccountPage"
+             BackgroundColor="White">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <Grid Grid.Row="0" BackgroundColor="#2E5E3F" Padding="20,12" ColumnDefinitions="Auto,*,Auto,Auto,Auto,Auto">
+            <HorizontalStackLayout Grid.Column="0" Spacing="8" VerticalOptions="Center">
+                <Label Text="&#x1F6D2;" FontSize="22" VerticalOptions="Center"/>
+                <Label Text="CraftCart" FontSize="20" TextColor="White" FontAttributes="Bold" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+            <Label Grid.Column="2" Text="Browse" TextColor="#C8D6C8" FontSize="14" VerticalOptions="Center" Margin="10,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnBrowseTapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Grid.Column="3" Text="My Cart" TextColor="#C8D6C8" FontSize="14" VerticalOptions="Center" Margin="10,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnCartTapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Grid.Column="4" Text="Orders" TextColor="#C8D6C8" FontSize="14" VerticalOptions="Center" Margin="10,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnOrdersTapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Grid.Column="5" Text="Account" TextColor="White" FontAttributes="Bold" FontSize="14" VerticalOptions="Center" Margin="10,0"/>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <Grid ColumnDefinitions="280,*" Padding="30,25" ColumnSpacing="30">
+
+                <VerticalStackLayout Grid.Column="0" Spacing="15">
+
+                    <Border Stroke="#E8E8E8" StrokeShape="RoundRectangle 10" Padding="25,30">
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Border BackgroundColor="#E3F2FD" StrokeShape="RoundRectangle 40" WidthRequest="80" HeightRequest="80"
+                                    Stroke="Transparent" HorizontalOptions="Center">
+                                <Label Text="&#x1F464;" FontSize="36" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </Border>
+                            <Label x:Name="profileName" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center"/>
+                            <Label x:Name="profileEmail" TextColor="Gray" FontSize="12" HorizontalOptions="Center"/>
+                            <Border BackgroundColor="#E8F5E9" StrokeShape="RoundRectangle 10" Padding="12,3" Stroke="Transparent"
+                                    HorizontalOptions="Center">
+                                <Label x:Name="profileRole" TextColor="#2E7D32" FontSize="11"/>
+                            </Border>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Stroke="#E8E8E8" StrokeShape="RoundRectangle 10" Padding="20">
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="Quick Stats" FontAttributes="Bold" FontSize="15"/>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Text="Total Orders:" FontSize="13" TextColor="#555"/>
+                                <Label x:Name="totalOrdersLabel" Grid.Column="1" FontAttributes="Bold" FontSize="13"/>
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Text="Total Spent:" FontSize="13" TextColor="#555"/>
+                                <Label x:Name="totalSpentLabel" Grid.Column="1" FontAttributes="Bold" FontSize="13" TextColor="#2E5E3F"/>
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Text="Reviews Left:" FontSize="13" TextColor="#555"/>
+                                <Label x:Name="reviewsLeftLabel" Grid.Column="1" FontAttributes="Bold" FontSize="13"/>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Button Text="Change Password" BackgroundColor="White" TextColor="#2E5E3F" BorderColor="#2E5E3F"
+                            BorderWidth="1" CornerRadius="8" Padding="15,8" FontSize="13" Clicked="OnChangePasswordClicked"/>
+
+                    <Button Text="Log Out" BackgroundColor="#D32F2F" TextColor="White"
+                            CornerRadius="8" Padding="15,8" FontSize="13" Clicked="OnLogOutClicked"/>
+
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="1" Spacing="15">
+
+                    <Label Text="My Account" FontSize="26" FontAttributes="Bold"/>
+                    <Label Text="Manage your profile and preferences" TextColor="Gray" FontSize="13" Margin="0,-10,0,5"/>
+
+                    <Label Text="Personal Information" FontAttributes="Bold" FontSize="17"/>
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
+                        <VerticalStackLayout Grid.Column="0" Spacing="5">
+                            <Label Text="First Name" FontAttributes="Bold" FontSize="12"/>
+                            <Entry x:Name="firstNameEntry" Placeholder="First Name" FontSize="14"/>
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="1" Spacing="5">
+                            <Label Text="Last Name" FontAttributes="Bold" FontSize="12"/>
+                            <Entry x:Name="lastNameEntry" Placeholder="Last Name" FontSize="14"/>
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <Label Text="Email" FontAttributes="Bold" FontSize="12"/>
+                    <Entry x:Name="emailEntry" Placeholder="Email" FontSize="14" IsReadOnly="True"/>
+
+                    <Label Text="Phone" FontAttributes="Bold" FontSize="12"/>
+                    <Entry x:Name="phoneEntry" Placeholder="(555) 123-4567" FontSize="14" Keyboard="Telephone"/>
+
+                    <Label Text="Shipping Address" FontAttributes="Bold" FontSize="17" Margin="0,10,0,0"/>
+
+                    <Label Text="Address" FontAttributes="Bold" FontSize="12"/>
+                    <Entry x:Name="addressEntry" Placeholder="123 Main Street, Apt 4B" FontSize="14"/>
+
+                    <Button Text="Save Changes" BackgroundColor="#2E5E3F" TextColor="White" CornerRadius="8"
+                            Padding="20,10" FontSize="14" HorizontalOptions="Start" Margin="0,10,0,0"
+                            Clicked="OnSaveClicked"/>
+
+                    <Label x:Name="statusLabel" TextColor="Green" FontSize="13"/>
+
+                </VerticalStackLayout>
+
+            </Grid>
+        </ScrollView>
+
+    </Grid>
+
+</ContentPage>

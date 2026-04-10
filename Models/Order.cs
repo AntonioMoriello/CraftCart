@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace CraftCart.Models
 {
@@ -16,5 +17,23 @@ namespace CraftCart.Models
         public double Shipping { get; set; }
         public double Total { get; set; }
         public string OrderDate { get; set; }
+
+        [JsonIgnore]
+        public string StatusColor => Status switch
+        {
+            "Processing" => "#E65100",
+            "Shipped" => "#1565C0",
+            "Delivered" => "#2E7D32",
+            _ => "#333333"
+        };
+
+        [JsonIgnore]
+        public string StatusBackground => Status switch
+        {
+            "Processing" => "#FFF3E0",
+            "Shipped" => "#E3F2FD",
+            "Delivered" => "#E8F5E9",
+            _ => "#F5F5F5"
+        };
     }
 }

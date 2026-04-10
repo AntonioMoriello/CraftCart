@@ -1,17 +1,14 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿namespace CraftCart;
 
-namespace CraftCart
+public partial class App : Application
 {
-    public partial class App : Application
+    public App()
     {
-        public App()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        protected override Window CreateWindow(IActivationState? activationState)
-        {
-            return new Window(new SplashScreen());
-        }
+    protected override Window CreateWindow(IActivationState? activationState)
+    {
+        return new Window(new SplashScreen());
     }
 }
