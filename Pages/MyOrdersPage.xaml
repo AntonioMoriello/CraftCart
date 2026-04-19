@@ -73,7 +73,7 @@
                             <Border Stroke="#E8E8E8" StrokeShape="RoundRectangle 10" Padding="20" Margin="0,0,0,8">
                                 <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
                                     <HorizontalStackLayout Spacing="10">
-                                        <Label Text="{Binding Id, StringFormat='Order #{0}'}" FontAttributes="Bold" FontSize="15"/>
+                                        <Label Text="{Binding ShortId, StringFormat='Order #{0}'}" FontAttributes="Bold" FontSize="15"/>
                                         <Border BackgroundColor="{Binding StatusBackground}" StrokeShape="RoundRectangle 10" Padding="10,3" Stroke="Transparent">
                                             <Label Text="{Binding Status}" TextColor="{Binding StatusColor}" FontSize="11"/>
                                         </Border>

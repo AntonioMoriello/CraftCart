@@ -28,6 +28,13 @@ public partial class ProductDetailPage : ContentPage
         ProductPriceLabel.Text = $"${_product.Price:F2}";
         ProductDescriptionLabel.Text = _product.Description;
 
+        if (_product.HasImage)
+        {
+            ProductImage.Source = ImageSource.FromFile(_product.ImageUrl);
+            ProductImage.IsVisible = true;
+            ImagePlaceholder.IsVisible = false;
+        }
+
         int stars = (int)Math.Round(_product.AverageRating);
         string starText = string.Empty;
         for (int i = 0; i < stars; i++)

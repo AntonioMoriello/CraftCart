@@ -15,6 +15,14 @@ public class FirebaseDbService
             .PostAsync(user);
     }
 
+    public async Task<string> AddUserGetKey(User user)
+    {
+        var result = await _firebase
+            .Child("Users")
+            .PostAsync(user);
+        return result.Key;
+    }
+
     public async Task<User?> GetUserByEmail(string email)
     {
         var users = await _firebase
@@ -201,5 +209,139 @@ public class FirebaseDbService
             .OnceAsync<Review>();
 
         return items.Where(i => i.Object.BuyerId == buyerId).Count();
+    }
+
+    public async Task<List<OrderItem>> GetOrderItems()
+    {
+        var items = await _firebase
+            .Child("OrderItems")
+            .OnceAsync<OrderItem>();
+
+        return items.Select(item => new OrderItem
+        {
+            Id = item.Key,
+            OrderId = item.Object.OrderId,
+            ProductId = item.Object.ProductId,
+            ProductName = item.Object.ProductName,
+            Quantity = item.Object.Quantity,
+            Price = item.Object.Price
+        }).ToList();
+    }
+
+    public async Task<List<OrderItem>> GetOrderItemsByOrder(string orderId)
+    {
+        var items = await GetOrderItems();
+        return items.Where(i => i.OrderId == orderId).ToList();
+    }
+
+    public async Task<List<Order>> GetOrdersBySeller(string sellerId)
+    {
+        var allProducts = await GetProducts();
+        var sellerProductIds = allProducts
+            .Where(p => p.SellerId == sellerId)
+            .Select(p => p.Id)
+            .ToList();
+
+        var allItems = await GetOrderItems();
+        var sellerOrderIds = allItems
+            .Where(i => sellerProductIds.Contains(i.ProductId))
+            .Select(i => i.OrderId)
+            .Distinct()
+            .ToList();
+
+        var orders = await _firebase
+            .Child("Orders")
+            .OnceAsync<Order>();
+
+        return orders
+            .Where(o => sellerOrderIds.Contains(o.Key))
+            .Select(item => new Order
+            {
+                Id = item.Key,
+                BuyerId = item.Object.BuyerId,
+                BuyerEmail = item.Object.BuyerEmail,
+                SellerId = item.Object.SellerId,
+                Status = item.Object.Status,
+                Subtotal = item.Object.Subtotal,
+                Tax = item.Object.Tax,
+                Shipping = item.Object.Shipping,
+                Total = item.Object.Total,
+                OrderDate = item.Object.OrderDate
+            }).ToList();
+    }
+
+    public async Task UpdateOrderStatus(string orderId, string status)
+    {
+        var orders = await _firebase
+            .Child("Orders")
+            .OnceAsync<Order>();
+
+        var match = orders.FirstOrDefault(o => o.Key == orderId);
+        if (match == null)
+            return;
+
+        var updated = match.Object;
+        updated.Status = status;
+
+        await _firebase
+            .Child("Orders")
+            .Child(orderId)
+            .PutAsync(updated);
+    }
+
+    public async Task<int> GetSoldCountByProduct(string productId)
+    {
+        var items = await GetOrderItems();
+        return items.Where(i => i.ProductId == productId).Sum(i => i.Quantity);
+    }
+
+    public async Task<double> GetRevenueByProduct(string productId)
+    {
+        var items = await GetOrderItems();
+        return items.Where(i => i.ProductId == productId).Sum(i => i.Price * i.Quantity);
+    }
+
+    public async Task<double> GetRevenueBySeller(string sellerId)
+    {
+        var products = await GetProductsBySeller(sellerId);
+        var items = await GetOrderItems();
+
+        double total = 0;
+        foreach (var p in products)
+        {
+            total += items.Where(i => i.ProductId == p.Id).Sum(i => i.Price * i.Quantity);
+        }
+        return total;
+    }
+
+    public async Task<int> GetOrderCountBySeller(string sellerId)
+    {
+        var orders = await GetOrdersBySeller(sellerId);
+        return orders.Count;
+    }
+
+    public async Task<double> GetAverageRatingBySeller(string sellerId)
+    {
+        var products = await GetProductsBySeller(sellerId);
+        if (products.Count == 0)
+            return 0;
+
+        double totalRating = 0;
+        int totalReviews = 0;
+
+        foreach (var p in products)
+        {
+            var reviews = await GetReviewsByProduct(p.Id);
+            foreach (var r in reviews)
+            {
+                totalRating += r.Rating;
+                totalReviews++;
+            }
+        }
+
+        if (totalReviews == 0)
+            return 0;
+
+        return totalRating / totalReviews;
     }
 }

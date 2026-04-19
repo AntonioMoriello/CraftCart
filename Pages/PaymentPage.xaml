@@ -103,7 +103,10 @@
                                 <DataTemplate>
                                     <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10" Padding="0,4">
                                         <Border BackgroundColor="#E8F5E9" StrokeShape="RoundRectangle 6" WidthRequest="40" HeightRequest="40" Stroke="Transparent">
-                                            <Label Text="&#x1F4E6;" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                            <Grid>
+                                                <Label Text="&#x1F4E6;" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                                <Image Source="{Binding Image}" Aspect="AspectFill"/>
+                                            </Grid>
                                         </Border>
                                         <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
                                             <Label Text="{Binding ProductName}" FontAttributes="Bold" FontSize="13"/>

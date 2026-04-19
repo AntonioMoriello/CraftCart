@@ -7,13 +7,20 @@ public partial class OrderConfirmedPage : ContentPage
 {
     private readonly FirebaseDbService _dbService = new FirebaseDbService();
     private readonly string _orderId;
+    private readonly List<string> _productIds;
     private int _rating = 1;
 
-    public OrderConfirmedPage(string orderId, string orderDate, int itemCount, double total)
+    public OrderConfirmedPage(string orderId, string orderDate, int itemCount, double total, List<string> productIds)
     {
         InitializeComponent();
         _orderId = orderId;
-        OrderIdLabel.Text = orderId;
+        _productIds = productIds ?? new List<string>();
+
+        string clean = (orderId ?? "").Replace("-", "");
+        int len = Math.Min(8, clean.Length);
+        string shortId = "CC-" + (clean.Length > 0 ? clean.Substring(clean.Length - len).ToUpper() : "0000");
+
+        OrderIdLabel.Text = shortId;
         OrderDateLabel.Text = orderDate;
         OrderItemsLabel.Text = itemCount.ToString();
         OrderTotalLabel.Text = $"${total:F2}";
@@ -61,17 +68,21 @@ public partial class OrderConfirmedPage : ContentPage
             string buyerId = await SecureStorage.GetAsync("user_id") ?? "";
             string buyerEmail = await SecureStorage.GetAsync("user_email") ?? "";
 
-            Review review = new Review
+            foreach (var productId in _productIds)
             {
-                ProductId = _orderId,
-                BuyerId = buyerId,
-                BuyerEmail = buyerEmail,
-                Rating = _rating,
-                Comment = ReviewEntry.Text ?? "",
-                Date = DateTime.Now.ToString("yyyy-MM-dd")
-            };
+                Review review = new Review
+                {
+                    ProductId = productId,
+                    BuyerId = buyerId,
+                    BuyerEmail = buyerEmail,
+                    Rating = _rating,
+                    Comment = ReviewEntry.Text ?? "",
+                    Date = DateTime.Now.ToString("yyyy-MM-dd")
+                };
 
-            await _dbService.AddReview(review);
+                await _dbService.AddReview(review);
+            }
+
             await DisplayAlertAsync("Thank you", "Your review has been submitted", "OK");
         }
         catch (Exception ex)

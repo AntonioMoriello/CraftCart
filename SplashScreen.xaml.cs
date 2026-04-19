@@ -1,3 +1,5 @@
+using CraftCart.Services;
+
 namespace CraftCart;
 
 public partial class SplashScreen : ContentPage
@@ -11,7 +13,10 @@ public partial class SplashScreen : ContentPage
     {
         base.OnAppearing();
 
-        await LoadingBar.ProgressTo(1.0, 3000, Easing.Linear);
+        var loading = LoadingBar.ProgressTo(1.0, 3000, Easing.Linear);
+        var seeding = SeedService.SeedProductsIfEmpty();
+
+        await Task.WhenAll(loading, seeding);
 
         Application.Current!.MainPage = new NavigationPage(new CraftCart.Pages.SignInPage());
     }

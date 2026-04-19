@@ -154,7 +154,11 @@ public partial class MyAccountPage : ContentPage
 
     private async void OnBrowseTapped(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new BrowseProductsPage());
+        string role = await SecureStorage.GetAsync("user_role") ?? "Buyer";
+        if (role == "Seller")
+            await Navigation.PushAsync(new SellerDashboardPage());
+        else
+            await Navigation.PushAsync(new BrowseProductsPage());
     }
 
     private async void OnCartTapped(object sender, EventArgs e)
@@ -164,6 +168,10 @@ public partial class MyAccountPage : ContentPage
 
     private async void OnOrdersTapped(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new MyOrdersPage());
+        string role = await SecureStorage.GetAsync("user_role") ?? "Buyer";
+        if (role == "Seller")
+            await Navigation.PushAsync(new OrderManagementPage());
+        else
+            await Navigation.PushAsync(new MyOrdersPage());
     }
 }

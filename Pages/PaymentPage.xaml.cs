@@ -113,9 +113,10 @@ public partial class PaymentPage : ContentPage
             }
 
             int totalItems = cartItems.Sum(i => i.Quantity);
+            var purchasedProductIds = cartItems.Select(i => i.ProductId).ToList();
             CartService.ClearCart();
 
-            await Navigation.PushAsync(new OrderConfirmedPage(orderId, order.OrderDate, totalItems, order.Total));
+            await Navigation.PushAsync(new OrderConfirmedPage(orderId, order.OrderDate, totalItems, order.Total, purchasedProductIds));
         }
         catch (Exception ex)
         {

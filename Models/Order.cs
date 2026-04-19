@@ -19,11 +19,30 @@ namespace CraftCart.Models
         public string OrderDate { get; set; }
 
         [JsonIgnore]
+        public string ItemsText { get; set; }
+
+        [JsonIgnore]
+        public string ShortId
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Id))
+                    return "CC-0000";
+
+                string clean = Id.Replace("-", "");
+                int len = Math.Min(6, clean.Length);
+                return "CC-" + clean.Substring(clean.Length - len).ToUpper();
+            }
+        }
+
+        [JsonIgnore]
         public string StatusColor => Status switch
         {
             "Processing" => "#E65100",
             "Shipped" => "#1565C0",
             "Delivered" => "#2E7D32",
+            "Pending" => "#E65100",
+            "Declined" => "#C62828",
             _ => "#333333"
         };
 
@@ -33,6 +52,8 @@ namespace CraftCart.Models
             "Processing" => "#FFF3E0",
             "Shipped" => "#E3F2FD",
             "Delivered" => "#E8F5E9",
+            "Pending" => "#FFF3E0",
+            "Declined" => "#FFEBEE",
             _ => "#F5F5F5"
         };
     }

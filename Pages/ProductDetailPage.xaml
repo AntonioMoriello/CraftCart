@@ -23,7 +23,11 @@
 
                 <Border Grid.Column="0" BackgroundColor="#E8F5E9" StrokeShape="RoundRectangle 12" Stroke="#E0E0E0"
                         HeightRequest="350" VerticalOptions="Start">
-                    <Label Text="&#x1F3FA;" FontSize="80" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Grid>
+                        <Label x:Name="ImagePlaceholder" Text="&#x1F3FA;" FontSize="80"
+                               HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Image x:Name="ProductImage" Aspect="AspectFill" IsVisible="False"/>
+                    </Grid>
                 </Border>
 
                 <VerticalStackLayout Grid.Column="1" Spacing="8">

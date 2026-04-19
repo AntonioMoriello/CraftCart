@@ -46,11 +46,11 @@ public partial class SignUpPage : ContentPage
                 DisplayName = EmailEntry.Text
             };
 
-            await _dbService.AddUser(user);
+            string userKey = await _dbService.AddUserGetKey(user);
 
             await SecureStorage.SetAsync("user_email", EmailEntry.Text);
             await SecureStorage.SetAsync("user_role", role);
-            await SecureStorage.SetAsync("user_id", user.Id ?? "");
+            await SecureStorage.SetAsync("user_id", userKey);
 
             if (role == "Buyer")
             {

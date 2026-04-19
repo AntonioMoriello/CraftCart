@@ -89,7 +89,10 @@
                         <DataTemplate>
                             <Border Stroke="#E8E8E8" StrokeShape="RoundRectangle 10" Padding="0" StrokeThickness="1">
                                 <VerticalStackLayout>
-                                    <BoxView BackgroundColor="#E8F5E9" HeightRequest="140"/>
+                                    <Grid HeightRequest="140">
+                                        <BoxView BackgroundColor="#E8F5E9"/>
+                                        <Image Source="{Binding Image}" Aspect="AspectFill"/>
+                                    </Grid>
                                     <VerticalStackLayout Padding="12,8" Spacing="2">
                                         <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="14"/>
                                         <Label Text="{Binding SellerName, StringFormat='by {0}'}" TextColor="Gray" FontSize="11"/>

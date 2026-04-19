@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace CraftCart.Models
 {
@@ -17,5 +19,17 @@ namespace CraftCart.Models
         public double AverageRating { get; set; }
         public int ReviewCount { get; set; }
         public int SalesCount { get; set; }
+
+        [JsonIgnore]
+        public double Revenue { get; set; }
+
+        [JsonIgnore]
+        public string RevenueText => $"${Revenue:F0}";
+
+        [JsonIgnore]
+        public bool HasImage => !string.IsNullOrEmpty(ImageUrl) && File.Exists(ImageUrl);
+
+        [JsonIgnore]
+        public ImageSource Image => HasImage ? ImageSource.FromFile(ImageUrl) : null;
     }
 }

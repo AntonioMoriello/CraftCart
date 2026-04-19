@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace CraftCart.Models
@@ -12,5 +13,9 @@ namespace CraftCart.Models
         public double Price { get; set; }
         public int Quantity { get; set; }
         public string ImageUrl { get; set; }
+
+        public bool HasImage => !string.IsNullOrEmpty(ImageUrl) && File.Exists(ImageUrl);
+
+        public ImageSource Image => HasImage ? ImageSource.FromFile(ImageUrl) : null;
     }
 }
